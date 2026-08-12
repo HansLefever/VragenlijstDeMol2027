@@ -1,0 +1,17 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>De Mol 2027 · Spelleider</title><style>*{box-sizing:border-box}body{margin:0;background:#000;color:#f5f7f2;font-family:Arial,sans-serif;min-height:100dvh;background:radial-gradient(circle at 50% 0,rgba(133,209,72,.12),transparent 32%),#000}.wrap{width:min(94%,760px);margin:auto;padding:22px 0 40px}.brand{color:#85d148;text-transform:uppercase;letter-spacing:.2em;font-weight:900;font-size:.78rem}.card{margin-top:18px;background:#0d120d;border:1px solid #253025;border-radius:22px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.55)}h1{font-size:clamp(2rem,7vw,3.1rem);margin:10px 0}h2{font-size:clamp(1.4rem,5vw,2.05rem);line-height:1.2}.muted,.counter,.version{color:#99a595}.version{text-align:center;font-size:.82rem;margin-top:12px}select,button{font:inherit}select{width:100%;padding:15px;background:#111811;color:#fff;border:1px solid #253025;border-radius:14px;min-height:52px}button{border:0;border-radius:14px;padding:15px;font-weight:900;min-height:52px;cursor:pointer}.primary{background:#85d148;color:#071007}.secondary{background:#182018;color:#fff}.full{width:100%;margin-top:14px}.top{display:flex;justify-content:space-between;gap:12px}.progress{height:6px;background:#182018;border-radius:99px;overflow:hidden;margin:18px 0}.progress div{height:100%;background:#85d148}.options{display:grid;gap:12px}.option{display:flex;gap:12px;padding:15px;background:#111811;border:1px solid #253025;border-radius:14px;cursor:pointer}.option.selected{outline:2px solid #85d148;background:#142014}.option input{accent-color:#85d148}.letter{color:#85d148;font-weight:900}.nav{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.hidden{display:none!important}.msg{margin-top:14px;padding:12px;border:1px solid #253025;border-radius:12px}.error{color:#ffc2c2;border-color:#7b2d2d}.ok{color:#dfffd0;border-color:#3c6d2b}.tablewrap{overflow:auto;margin-top:16px;border:1px solid #253025;border-radius:14px}table{border-collapse:collapse;min-width:980px;width:100%}th,td{padding:9px 10px;border-bottom:1px solid #253025;white-space:nowrap;text-align:left}th{background:#141b14;color:#85d148}</style></head><body><div class="wrap"><div class="brand">De Mol 2027 · Spelleider</div><section class="card">
+<h1>Ingevulde antwoorden</h1>
+<div id="loginBox">
+  <p class="muted">Meld je aan als spelleider om de inzendingen te bekijken.</p>
+  <input id="email" type="email" placeholder="E-mailadres" autocomplete="username" style="width:100%;padding:15px;background:#111811;color:#fff;border:1px solid #253025;border-radius:14px;min-height:52px;margin-top:10px">
+  <input id="password" type="password" placeholder="Wachtwoord" autocomplete="current-password" style="width:100%;padding:15px;background:#111811;color:#fff;border:1px solid #253025;border-radius:14px;min-height:52px;margin-top:10px">
+  <button id="login" class="primary full">Aanmelden →</button>
+</div>
+<div id="adminBox" class="hidden">
+  <p class="muted">Aangemeld als <strong id="loggedInAs"></strong>.</p>
+  <button id="load" class="primary">Antwoorden laden</button>
+  <button id="csv" class="secondary" disabled>CSV exporteren</button>
+  <button id="logout" class="secondary">Afmelden</button>
+</div>
+<div id="msg" class="msg hidden"></div>
+<div id="table" class="tablewrap hidden"></div>
+</section></div><script src="questions.js"></script><script src="firebase-config.js"></script><script type="module" src="admin.js"></script></body></html>
