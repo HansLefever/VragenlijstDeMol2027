@@ -1,4 +1,4 @@
-DE MOL 2027 – VRAGENLIJST V1.3
+DE MOL 2027 – VRAGENLIJST V1.4
 
 Inhoud:
 - 30 behouden meerkeuzevragen (18 opgegeven vragen verwijderd)
@@ -13,4 +13,4 @@ BELANGRIJK BIJ PUBLICATIE:
 
 De bestaande qrGame/main-regel is behouden.
 
-V1.3: Foto-upload en Firebase Storage zijn verwijderd. Alleen Firestore is nodig voor de antwoorden.
+V1.4: Foto-upload en Firebase Storage zijn verwijderd. Alleen Firestore is nodig voor de antwoorden.
