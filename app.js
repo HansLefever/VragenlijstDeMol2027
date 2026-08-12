@@ -5,7 +5,7 @@ const M=window.DEMOL_QUESTIONS,O=window.DEMOL_OPEN_QUESTIONS,N=window.DEMOL_NAME
 N.forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=n;$('name').appendChild(o)});
 
 // Open vragen worden tussen de meerkeuzevragen gemengd zodat Mol-vragen niet bij elkaar staan.
-const slots=[3,7,11,15,19,23,27,31,35,40];
+const slots=[3,7,11,15,19,23,27,31,34,37,40];
 let sequence=[],mi=0,oi=0;
 for(let pos=1;pos<=40;pos++){
   if(slots.includes(pos)) sequence.push({type:'open',i:oi++});
@@ -88,7 +88,7 @@ $('next').onclick=()=>{
   }
   if(idx<39){idx++;render()}
   else{
-    $('reviewText').textContent='Alle 30 meerkeuzevragen en 10 open vragen zijn ingevuld voor '+person+'.';
+    $('reviewText').textContent='Alle 29 meerkeuzevragen en 11 open vragen zijn ingevuld voor '+person+'.';
     show('review');
   }
 };
@@ -114,7 +114,7 @@ $('submitBtn').onclick=async()=>{
       openAnswers:open,
       openAnswerDetails,
       submittedAt:serverTimestamp(),
-      version:'1.5'
+      version:'1.6'
     });
     show('done');
   }catch(e){

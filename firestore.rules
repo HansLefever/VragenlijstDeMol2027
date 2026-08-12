@@ -17,13 +17,13 @@ service cloud.firestore {
       ])
       && request.resource.data.name is string
       && request.resource.data.answers is list
-      && request.resource.data.answers.size() == 30
+      && request.resource.data.answers.size() == 29
       && request.resource.data.answerDetails is list
-      && request.resource.data.answerDetails.size() == 30
+      && request.resource.data.answerDetails.size() == 29
       && request.resource.data.openAnswers is list
-      && request.resource.data.openAnswers.size() == 10
+      && request.resource.data.openAnswers.size() == 11
       && request.resource.data.openAnswerDetails is list
-      && request.resource.data.openAnswerDetails.size() == 10;
+      && request.resource.data.openAnswerDetails.size() == 11;
 
       allow read: if request.auth != null;
       allow delete: if false;
