@@ -1,40 +1,6 @@
 rules_version = '2';
-
-service cloud.firestore {
-  match /databases/{database}/documents {
-
-    // Bestaande QR-teller: ongewijzigde bescherming.
-    match /qrGame/main {
-      allow read: if true;
-      allow update: if
-        request.resource.data.keys().hasOnly(['count']) &&
-        resource.data.keys().hasOnly(['count']) &&
-        resource.data.count is int &&
-        request.resource.data.count is int &&
-        request.resource.data.count == resource.data.count + 1;
-      allow create, delete: if false;
-    }
-
-    // Deelnemers mogen hun persoonlijke antwoorddocument aanmaken of bijwerken.
-    // Lezen is alleen toegestaan voor een ingelogde beheerder via Firebase Authentication.
-    match /responses/{participant} {
-      allow create, update: if
-        request.resource.data.keys().hasOnly([
-          'name', 'answers', 'answerDetails', 'submittedAt', 'version'
-        ]) &&
-        request.resource.data.name is string &&
-        request.resource.data.answers is list &&
-        request.resource.data.answers.size() == 48 &&
-        request.resource.data.answerDetails is list &&
-        request.resource.data.answerDetails.size() == 48;
-
-      allow read: if request.auth != null;
-      allow delete: if false;
-    }
-
-    // Al het overige blokkeren.
-    match /{document=**} {
-      allow read, write: if false;
-    }
-  }
-}
+service cloud.firestore { match /databases/{database}/documents {
+ match /qrGame/main { allow read: if true; allow update: if request.resource.data.keys().hasOnly(['count']) && resource.data.keys().hasOnly(['count']) && resource.data.count is int && request.resource.data.count is int && request.resource.data.count == resource.data.count + 1; allow create, delete: if false; }
+ match /responses/{participant} { allow create, update: if request.resource.data.keys().hasOnly(['name','answers','answerDetails','openAnswers','openAnswerDetails','photoPath','submittedAt','version']) && request.resource.data.name is string && request.resource.data.answers is list && request.resource.data.answers.size()==30 && request.resource.data.answerDetails is list && request.resource.data.answerDetails.size()==30 && request.resource.data.openAnswers is list && request.resource.data.openAnswers.size()==10 && request.resource.data.openAnswerDetails is list && request.resource.data.openAnswerDetails.size()==10 && request.resource.data.photoPath is string; allow read: if request.auth != null; allow delete: if false; }
+ match /{document=**} { allow read, write: if false; }
+}}
