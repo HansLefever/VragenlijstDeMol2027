@@ -34,7 +34,7 @@ function render(){
   $('who').textContent=person;
   $('counter').textContent=(idx+1)+' / 40';
   $('bar').style.width=((idx+1)/40*100)+'%';
-  $('qno').textContent=(item.type==='mc'?'Meerkeuzevraag ':'Open vraag ')+(item.i+1);
+  $('qno').textContent='Vraag '+(idx+1);
   $('options').innerHTML='';
   $('openAnswer').classList.add('hidden');
 
@@ -88,7 +88,7 @@ $('next').onclick=()=>{
   }
   if(idx<39){idx++;render()}
   else{
-    $('reviewText').textContent='Alle 29 meerkeuzevragen en 11 open vragen zijn ingevuld voor '+person+'.';
+    $('reviewText').textContent='Alle 40 vragen zijn ingevuld voor '+person+'.';
     show('review');
   }
 };
