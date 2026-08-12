@@ -53,10 +53,12 @@ $('load').onclick = async () => {
     s.forEach(d => rows.push(d.data()));
     rows.sort((a,b) => (a.name || '').localeCompare(b.name || '', 'nl'));
     let h = '<table><thead><tr><th>Naam</th>' +
-      window.DEMOL_QUESTIONS.map((_,i) => '<th>MK'+(i+1)+'</th>').join('') + window.DEMOL_OPEN_QUESTIONS.map((_,i) => '<th>Open '+(i+1)+'</th>').join('') + '<th>Foto</th>' +
+      window.DEMOL_QUESTIONS.map((_,i) => '<th>MK'+(i+1)+'</th>').join('') + window.DEMOL_OPEN_QUESTIONS.map((_,i) => '<th>Open '+(i+1)+'</th>').join('') +
       '</tr></thead><tbody>';
     for (const r of rows) {
       h += '<tr><td>' + (r.name || '') + '</td>' +
+        (r.answers || []).map(v => '<td>' + (v || '') + '</td>').join('') +
+        (r.openAnswers || []).map(v => '<td>' + String(v || '').replaceAll('<','&lt;').replaceAll('>','&gt;') + '</td>').join('') +
         '</tr>';
     }
     h += '</tbody></table>';
@@ -73,8 +75,11 @@ $('load').onclick = async () => {
 $('csv').onclick = () => {
   if (!rows.length) return;
   const esc = v => '"' + String(v ?? '').replaceAll('"','""') + '"';
-  const header = ['Naam', ...window.DEMOL_QUESTIONS.map((_,i) => 'MK'+(i+1)), ...window.DEMOL_OPEN_QUESTIONS.map((q,i) => 'Open '+(i+1)+': '+q), 'Foto'];
+  const header = ['Naam', ...window.DEMOL_QUESTIONS.map((_,i) => 'MK'+(i+1)), ...window.DEMOL_OPEN_QUESTIONS.map((q,i) => 'Open '+(i+1)+': '+q)];
   const lines = [header.map(esc).join(';')];
+  for (const r of rows) {
+    lines.push([r.name || '', ...(r.answers || []), ...(r.openAnswers || [])].map(esc).join(';'));
+  }
   const blob = new Blob(['\ufeff' + lines.join('\r\n')], {type:'text/csv;charset=utf-8'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
