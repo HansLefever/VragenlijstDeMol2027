@@ -2,8 +2,6 @@ import {initializeApp} from 'https://www.gstatic.com/firebasejs/12.2.1/firebase-
 import {getFirestore,doc,setDoc,serverTimestamp} from 'https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js';
 
 const M=window.DEMOL_QUESTIONS,O=window.DEMOL_OPEN_QUESTIONS,N=window.DEMOL_NAMES,$=id=>document.getElementById(id);
-N.forEach(n=>{const o=document.createElement('option');o.value=n;o.textContent=n;$('name').appendChild(o)});
-
 // Open vragen worden tussen de meerkeuzevragen gemengd zodat Mol-vragen niet bij elkaar staan.
 const slots=[3,7,11,15,19,23,27,31,34,37,40];
 let sequence=[],mi=0,oi=0;
@@ -12,7 +10,7 @@ for(let pos=1;pos<=40;pos++){
   else sequence.push({type:'mc',i:mi++});
 }
 
-let idx=0,person='',mc=Array(M.length).fill(null),open=Array(O.length).fill('');
+let idx=0,person='',profile={},mc=Array(M.length).fill(null),open=Array(O.length).fill('');
 const appFirebase=initializeApp(window.FIREBASE_CONFIG);
 const db=getFirestore(appFirebase);
 
@@ -59,12 +57,24 @@ function render(){
 }
 
 $('startBtn').onclick=()=>{
-  person=$('name').value;
-  if(!person){
-    $('startMsg').textContent='Kies eerst je naam.';
+  profile={
+    firstName:$('firstName').value.trim(),
+    lastName:$('lastName').value.trim(),
+    birthDate:$('birthDate').value,
+    birthPlace:$('birthPlace').value.trim(),
+    address:$('address').value.trim(),
+    postalCode:$('postalCode').value.trim(),
+    city:$('city').value.trim(),
+    phone:$('phone').value.trim(),
+    email:$('email').value.trim()
+  };
+  const required=['firstName','lastName','birthDate','birthPlace','address','postalCode','city','phone'];
+  if(required.some(k=>!profile[k])){
+    $('startMsg').textContent='Vul eerst alle verplichte persoonsgegevens in.';
     $('startMsg').classList.remove('hidden');
     return;
   }
+  person=(profile.firstName+' '+profile.lastName).trim();
   $('startMsg').classList.add('hidden');
   show('quiz');
   render();
@@ -109,12 +119,13 @@ $('submitBtn').onclick=async()=>{
     const key=person.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-');
     await setDoc(doc(db,'responses',key),{
       name:person,
+      profile:profile,
       answers:mc,
       answerDetails,
       openAnswers:open,
       openAnswerDetails,
       submittedAt:serverTimestamp(),
-      version:'1.6'
+      version:'2.0'
     });
     show('done');
   }catch(e){

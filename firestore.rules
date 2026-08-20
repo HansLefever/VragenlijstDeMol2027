@@ -13,9 +13,22 @@ service cloud.firestore {
 
     match /responses/{participant} {
       allow create, update: if request.resource.data.keys().hasOnly([
-        'name','answers','answerDetails','openAnswers','openAnswerDetails','submittedAt','version'
+        'name','profile','answers','answerDetails','openAnswers','openAnswerDetails','submittedAt','version'
       ])
       && request.resource.data.name is string
+      && request.resource.data.profile is map
+      && request.resource.data.profile.keys().hasOnly([
+        'firstName','lastName','birthDate','birthPlace','address','postalCode','city','phone','email'
+      ])
+      && request.resource.data.profile.firstName is string
+      && request.resource.data.profile.lastName is string
+      && request.resource.data.profile.birthDate is string
+      && request.resource.data.profile.birthPlace is string
+      && request.resource.data.profile.address is string
+      && request.resource.data.profile.postalCode is string
+      && request.resource.data.profile.city is string
+      && request.resource.data.profile.phone is string
+      && request.resource.data.profile.email is string
       && request.resource.data.answers is list
       && request.resource.data.answers.size() == 29
       && request.resource.data.answerDetails is list

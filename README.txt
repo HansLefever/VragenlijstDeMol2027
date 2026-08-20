@@ -15,3 +15,9 @@ De bestaande qrGame/main-regel is behouden.
 
 
 V1.6: Alleen Firestore wordt gebruikt voor de antwoorden.
+
+
+VERSIE 2.0
+- Persoonsgegevens toegevoegd vóór de vragenlijst: voornaam, familienaam, geboortedatum, geboorteplaats, adres, postcode, gemeente, telefoonnummer en optioneel e-mailadres.
+- Geen foto-upload: Firebase Storage blijft niet nodig.
+- De 40 bestaande vragen blijven behouden.
