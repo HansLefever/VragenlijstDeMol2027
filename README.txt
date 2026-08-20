@@ -21,3 +21,10 @@ VERSIE 2.0
 - Persoonsgegevens toegevoegd vóór de vragenlijst: voornaam, familienaam, geboortedatum, geboorteplaats, adres, postcode, gemeente, telefoonnummer en optioneel e-mailadres.
 - Geen foto-upload: Firebase Storage blijft niet nodig.
 - De 40 bestaande vragen blijven behouden.
+
+
+VERSIE 2.1
+- Persoonsgegevens beperkt tot voornaam en familienaam.
+- Eén gedeelde 4-cijferige toegangscode voor alle deelnemers.
+- Huidige toegangscode: 2027
+- De code wordt niet opgeslagen in Firestore.

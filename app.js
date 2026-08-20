@@ -59,21 +59,28 @@ function render(){
 $('startBtn').onclick=()=>{
   profile={
     firstName:$('firstName').value.trim(),
-    lastName:$('lastName').value.trim(),
-    birthDate:$('birthDate').value,
-    birthPlace:$('birthPlace').value.trim(),
-    address:$('address').value.trim(),
-    postalCode:$('postalCode').value.trim(),
-    city:$('city').value.trim(),
-    phone:$('phone').value.trim(),
-    email:$('email').value.trim()
+    lastName:$('lastName').value.trim()
   };
-  const required=['firstName','lastName','birthDate','birthPlace','address','postalCode','city','phone'];
-  if(required.some(k=>!profile[k])){
-    $('startMsg').textContent='Vul eerst alle verplichte persoonsgegevens in.';
+  const code=$('accessCode').value.trim();
+
+  if(!profile.firstName || !profile.lastName){
+    $('startMsg').textContent='Vul eerst je voornaam en familienaam in.';
     $('startMsg').classList.remove('hidden');
     return;
   }
+
+  if(!/^\d{4}$/.test(code)){
+    $('startMsg').textContent='Voer een geldige code van 4 cijfers in.';
+    $('startMsg').classList.remove('hidden');
+    return;
+  }
+
+  if(code!=='5831'){
+    $('startMsg').textContent='De toegangscode is niet correct.';
+    $('startMsg').classList.remove('hidden');
+    return;
+  }
+
   person=(profile.firstName+' '+profile.lastName).trim();
   $('startMsg').classList.add('hidden');
   show('quiz');
@@ -125,7 +132,7 @@ $('submitBtn').onclick=async()=>{
       openAnswers:open,
       openAnswerDetails,
       submittedAt:serverTimestamp(),
-      version:'2.0'
+      version:'2.1'
     });
     show('done');
   }catch(e){

@@ -56,7 +56,7 @@ $('load').onclick = async () => {
       window.DEMOL_QUESTIONS.map((_,i) => '<th>MK'+(i+1)+'</th>').join('') + window.DEMOL_OPEN_QUESTIONS.map((_,i) => '<th>Open '+(i+1)+'</th>').join('') +
       '</tr></thead><tbody>';
     for (const r of rows) {
-      h += '<tr><td>' + (r.name || '') + '</td><td>' + (r.profile?.birthDate || '') + '</td><td>' + (r.profile?.birthPlace || '') + '</td><td>' + (r.profile?.address || '') + '</td><td>' + (r.profile?.postalCode || '') + '</td><td>' + (r.profile?.city || '') + '</td><td>' + (r.profile?.phone || '') + '</td><td>' + (r.profile?.email || '') + '</td>' +
+      h += '<tr><td>' + (r.name || '') + '</td>' +
         (r.answers || []).map(v => '<td>' + (v || '') + '</td>').join('') +
         (r.openAnswers || []).map(v => '<td>' + String(v || '').replaceAll('<','&lt;').replaceAll('>','&gt;') + '</td>').join('') +
         '</tr>';
@@ -75,10 +75,10 @@ $('load').onclick = async () => {
 $('csv').onclick = () => {
   if (!rows.length) return;
   const esc = v => '"' + String(v ?? '').replaceAll('"','""') + '"';
-  const header = ['Naam','Geboortedatum','Geboorteplaats','Adres','Postcode','Gemeente','Telefoon','E-mail', ...window.DEMOL_QUESTIONS.map((_,i) => 'MK'+(i+1)), ...window.DEMOL_OPEN_QUESTIONS.map((q,i) => 'Open '+(i+1)+': '+q)];
+  const header = ['Naam', ...window.DEMOL_QUESTIONS.map((_,i) => 'MK'+(i+1)), ...window.DEMOL_OPEN_QUESTIONS.map((q,i) => 'Open '+(i+1)+': '+q)];
   const lines = [header.map(esc).join(';')];
   for (const r of rows) {
-    lines.push([r.name || '', r.profile?.birthDate || '', r.profile?.birthPlace || '', r.profile?.address || '', r.profile?.postalCode || '', r.profile?.city || '', r.profile?.phone || '', r.profile?.email || '', ...(r.answers || []), ...(r.openAnswers || [])].map(esc).join(';'));
+    lines.push([r.name || '', ...(r.answers || []), ...(r.openAnswers || [])].map(esc).join(';'));
   }
   const blob = new Blob(['\ufeff' + lines.join('\r\n')], {type:'text/csv;charset=utf-8'});
   const a = document.createElement('a');
