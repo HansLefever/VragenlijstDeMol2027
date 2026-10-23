@@ -241,5 +241,4 @@ window.DEMOL_NAMES = [
   "Valerie",
   "Emma",
   "Julie"
-  "Hans"
 ];
