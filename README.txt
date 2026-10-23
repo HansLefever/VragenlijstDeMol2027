@@ -28,3 +28,10 @@ VERSIE 2.1
 - Eén gedeelde 4-cijferige toegangscode voor alle deelnemers.
 - Huidige toegangscode: 2027
 - De code wordt niet opgeslagen in Firestore.
+
+
+VERSIE 2.2 – VRAGEN MAKKELIJKER WIJZIGEN
+- questions.js is nu netjes opgemaakt. Elke meerkeuzevraag staat samen met antwoord A, B, C en D in één blok.
+- Om vragen te wijzigen, pas alleen de teksten in questions.js aan.
+- Laat de structuur en veldnamen (vraag, A, B, C, D) staan.
+- Upload na wijzigingen minstens questions.js naar de GitHub-repository.

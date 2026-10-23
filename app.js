@@ -75,7 +75,7 @@ $('startBtn').onclick=()=>{
     return;
   }
 
-  if(code!=='5831'){
+  if(code!=='2027'){
     $('startMsg').textContent='De toegangscode is niet correct.';
     $('startMsg').classList.remove('hidden');
     return;
